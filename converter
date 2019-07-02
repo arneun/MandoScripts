@@ -1,0 +1,9 @@
+NAZWA="copernicon_2016_shehn_"
+COUNT=0
+for img in $(find ./shehn)
+do
+  echo $img" to "$NAZWA$COUNT
+  convert $img -resize x1000 $NAZWA$COUNT".jpg" 
+  convert $img -resize x100 $NAZWA$COUNT"_t.jpg"
+  COUNT=$(($COUNT + 1))
+done

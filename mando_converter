@@ -1,0 +1,35 @@
+NAZWA="./test/mando_"
+COUNT=0
+
+mkdir test
+
+for img in $(find ./test_mando)
+do
+  echo $img" to "$NAZWA$COUNT
+  NAME=$(file $img)
+  IFS=', ' read -r -a FILE_DATA <<< "$NAME"
+  WIDTH="${FILE_DATA[6]}"
+  WIDTH=$((WIDTH))
+  HEIGHT="${FILE_DATA[4]}"
+  HEIGHT=$((HEIGHT))
+  if [ $WIDTH -gt $HEIGHT ]; then
+    convert $img -colorspace Gray -resize x100 $NAZWA$COUNT".jpg"
+  else
+    convert $img -colorspace Gray -resize 100x $NAZWA$COUNT".jpg"
+  fi
+  COUNT=$(($COUNT + 1))
+done
+
+NAZWA="./squared/mando_"
+COUNT=0
+
+mkdir squared
+
+for img in $(find ./test)
+do
+  echo $img" to "$NAZWA$COUNT
+  composite -blend 80 -gravity center $img back.jpg $NAZWA$COUNT".jpg"
+  COUNT=$(($COUNT + 1))
+done
+
+

@@ -1,0 +1,13 @@
+NAZWA="./flipped/mando_"
+COUNT=0
+
+mkdir flipped
+
+for img in $(find ./squared)
+do
+  echo $img" to "$NAZWA$COUNT
+  convert $img -flop $NAZWA$COUNT".jpg"
+  COUNT=$(($COUNT + 1))
+done
+
+
